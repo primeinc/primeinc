@@ -1,0 +1,264 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="100%">
+  <defs>
+    <style>
+      /* ── animated background gradient ── */
+      @keyframes bgShift {
+        0%   { stop-color: #0d0221; }
+        25%  { stop-color: #150050; }
+        50%  { stop-color: #3f0071; }
+        75%  { stop-color: #000428; }
+        100% { stop-color: #0d0221; }
+      }
+      @keyframes bgShift2 {
+        0%   { stop-color: #000428; }
+        25%  { stop-color: #0d0221; }
+        50%  { stop-color: #150050; }
+        75%  { stop-color: #610094; }
+        100% { stop-color: #000428; }
+      }
+      @keyframes bgShift3 {
+        0%   { stop-color: #150050; }
+        25%  { stop-color: #610094; }
+        50%  { stop-color: #004e92; }
+        75%  { stop-color: #0d0221; }
+        100% { stop-color: #150050; }
+      }
+
+      /* ── text gradient animation ── */
+      @keyframes textGrad1 {
+        0%   { stop-color: #ff00ff; }
+        33%  { stop-color: #00ffff; }
+        66%  { stop-color: #ffff00; }
+        100% { stop-color: #ff00ff; }
+      }
+      @keyframes textGrad2 {
+        0%   { stop-color: #00ffff; }
+        33%  { stop-color: #ff6ec7; }
+        66%  { stop-color: #ff00ff; }
+        100% { stop-color: #00ffff; }
+      }
+      @keyframes textGrad3 {
+        0%   { stop-color: #ffff00; }
+        33%  { stop-color: #ff00ff; }
+        66%  { stop-color: #00ffff; }
+        100% { stop-color: #ffff00; }
+      }
+
+      /* ── ghost float ── */
+      @keyframes ghostFloat1 {
+        0%, 100% { transform: translate(-4px, -4px) skewX(-2deg); opacity: 0.15; }
+        50%      { transform: translate(-8px, 2px) skewX(-3deg); opacity: 0.10; }
+      }
+      @keyframes ghostFloat2 {
+        0%, 100% { transform: translate(4px, 4px) skewX(2deg); opacity: 0.12; }
+        50%      { transform: translate(8px, -2px) skewX(3deg); opacity: 0.08; }
+      }
+
+      /* ── flicker ── */
+      @keyframes flicker {
+        0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+        20%, 24%, 55% { opacity: 0.85; }
+      }
+
+      /* ── drip ── */
+      @keyframes drip1 {
+        0%   { height: 0; opacity: 0.7; }
+        80%  { height: 50; opacity: 0.4; }
+        100% { height: 60; opacity: 0; }
+      }
+      @keyframes drip2 {
+        0%   { height: 0; opacity: 0.6; }
+        80%  { height: 40; opacity: 0.3; }
+        100% { height: 50; opacity: 0; }
+      }
+
+      /* ── particle drift ── */
+      @keyframes particleDrift1 {
+        0%   { transform: translate(0, 0); opacity: 0; }
+        10%  { opacity: 0.6; }
+        90%  { opacity: 0.6; }
+        100% { transform: translate(60px, -80px); opacity: 0; }
+      }
+      @keyframes particleDrift2 {
+        0%   { transform: translate(0, 0); opacity: 0; }
+        10%  { opacity: 0.4; }
+        90%  { opacity: 0.4; }
+        100% { transform: translate(-50px, -60px); opacity: 0; }
+      }
+      @keyframes particleDrift3 {
+        0%   { transform: translate(0, 0); opacity: 0; }
+        10%  { opacity: 0.5; }
+        90%  { opacity: 0.5; }
+        100% { transform: translate(40px, 70px); opacity: 0; }
+      }
+      @keyframes particleDrift4 {
+        0%   { transform: translate(0, 0); opacity: 0; }
+        15%  { opacity: 0.3; }
+        85%  { opacity: 0.3; }
+        100% { transform: translate(-70px, 50px); opacity: 0; }
+      }
+
+      /* ── scanline scroll ── */
+      @keyframes scanScroll {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(8px); }
+      }
+
+      /* ── tagline pulse ── */
+      @keyframes tagPulse {
+        0%, 100% { opacity: 0.5; }
+        50%      { opacity: 0.8; }
+      }
+
+      .main-text {
+        animation: flicker 8s linear infinite;
+      }
+      .ghost1 {
+        animation: ghostFloat1 4s ease-in-out infinite;
+      }
+      .ghost2 {
+        animation: ghostFloat2 5s ease-in-out infinite;
+      }
+      .tagline {
+        font-family: 'Courier New', 'Lucida Console', monospace;
+        animation: tagPulse 4s ease-in-out infinite;
+      }
+      .scanlines {
+        animation: scanScroll 0.5s linear infinite;
+      }
+    </style>
+
+    <!-- background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   style="stop-color:#0d0221"><animate attributeName="stop-color" values="#0d0221;#150050;#3f0071;#000428;#0d0221" dur="12s" repeatCount="indefinite"/></stop>
+      <stop offset="50%"  style="stop-color:#150050"><animate attributeName="stop-color" values="#150050;#610094;#004e92;#0d0221;#150050" dur="12s" repeatCount="indefinite"/></stop>
+      <stop offset="100%" style="stop-color:#000428"><animate attributeName="stop-color" values="#000428;#0d0221;#150050;#610094;#000428" dur="12s" repeatCount="indefinite"/></stop>
+    </linearGradient>
+
+    <!-- text gradient -->
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"><animate attributeName="stop-color" values="#ff00ff;#00ffff;#ffff00;#ff00ff" dur="6s" repeatCount="indefinite"/></stop>
+      <stop offset="50%"><animate attributeName="stop-color" values="#00ffff;#ff6ec7;#ff00ff;#00ffff" dur="6s" repeatCount="indefinite"/></stop>
+      <stop offset="100%"><animate attributeName="stop-color" values="#ffff00;#ff00ff;#00ffff;#ffff00" dur="6s" repeatCount="indefinite"/></stop>
+    </linearGradient>
+
+    <!-- glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" result="blur2"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur3"/>
+      <feMerge>
+        <feMergeNode in="blur3"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- ghost glow filters -->
+    <filter id="glowMagenta" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0.3  0 0 0 0 0  0 0 0 0 0.3  0 0 0 1 0"/>
+    </filter>
+    <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0.3  0 0 0 0 0.3  0 0 0 1 0"/>
+    </filter>
+
+    <!-- drip gradients -->
+    <linearGradient id="dripMagenta" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff00ff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ff00ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dripCyan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00ffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00ffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dripYellow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffff00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffff00" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- scanline pattern -->
+    <pattern id="scanPattern" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="transparent"/>
+      <rect y="2" width="4" height="2" fill="rgba(0,0,0,0.12)"/>
+    </pattern>
+
+    <!-- grid pattern -->
+    <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
+      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,255,255,0.04)" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- background -->
+  <rect width="900" height="400" rx="12" fill="url(#bgGrad)"/>
+
+  <!-- grid overlay -->
+  <rect width="900" height="400" rx="12" fill="url(#gridPattern)"/>
+
+  <!-- scanlines -->
+  <g class="scanlines" clip-path="inset(0 round 12px)">
+    <rect width="900" height="420" y="-10" fill="url(#scanPattern)"/>
+  </g>
+
+  <!-- floating particles -->
+  <circle cx="120" cy="80"  r="1.5" fill="#ff00ff" style="animation: particleDrift1 7s linear infinite"/>
+  <circle cx="250" cy="320" r="1"   fill="#00ffff" style="animation: particleDrift2 9s linear infinite; animation-delay: 1s"/>
+  <circle cx="400" cy="60"  r="2"   fill="#ffff00" style="animation: particleDrift3 6s linear infinite; animation-delay: 0.5s"/>
+  <circle cx="600" cy="340" r="1.5" fill="#ff6ec7" style="animation: particleDrift4 8s linear infinite; animation-delay: 2s"/>
+  <circle cx="750" cy="100" r="1"   fill="#00ffff" style="animation: particleDrift1 10s linear infinite; animation-delay: 3s"/>
+  <circle cx="800" cy="280" r="2"   fill="#ff00ff" style="animation: particleDrift2 7s linear infinite; animation-delay: 4s"/>
+  <circle cx="50"  cy="200" r="1.5" fill="#ffff00" style="animation: particleDrift3 9s linear infinite; animation-delay: 1.5s"/>
+  <circle cx="500" cy="350" r="1"   fill="#ff6ec7" style="animation: particleDrift4 6s linear infinite; animation-delay: 2.5s"/>
+  <circle cx="320" cy="150" r="1.8" fill="#00ffff" style="animation: particleDrift1 8s linear infinite; animation-delay: 0.8s"/>
+  <circle cx="680" cy="200" r="1.2" fill="#ff00ff" style="animation: particleDrift2 11s linear infinite; animation-delay: 3.5s"/>
+  <circle cx="150" cy="300" r="1.5" fill="#ffff00" style="animation: particleDrift3 7s linear infinite; animation-delay: 5s"/>
+  <circle cx="850" cy="150" r="1"   fill="#00ffff" style="animation: particleDrift4 9s linear infinite; animation-delay: 1.2s"/>
+
+  <!-- corner brackets -->
+  <g stroke="rgba(0,255,255,0.25)" stroke-width="2" fill="none">
+    <path d="M 30,55 L 30,30 L 55,30"/>
+    <path d="M 870,55 L 870,30 L 845,30"/>
+    <path d="M 30,345 L 30,370 L 55,370"/>
+    <path d="M 870,345 L 870,370 L 845,370"/>
+  </g>
+
+  <!-- ghost layer 1 (magenta) -->
+  <text class="ghost1" x="450" y="230" text-anchor="middle"
+        font-family="'Impact','Arial Black','Segoe UI Black',sans-serif" font-size="200" font-weight="900"
+        fill="#ff00ff" filter="url(#glowMagenta)" opacity="0.15"
+        letter-spacing="12">WP</text>
+
+  <!-- ghost layer 2 (cyan) -->
+  <text class="ghost2" x="450" y="230" text-anchor="middle"
+        font-family="'Impact','Arial Black','Segoe UI Black',sans-serif" font-size="200" font-weight="900"
+        fill="#00ffff" filter="url(#glowCyan)" opacity="0.12"
+        letter-spacing="12">WP</text>
+
+  <!-- main initials -->
+  <text class="main-text" x="450" y="230" text-anchor="middle"
+        font-family="'Impact','Arial Black','Segoe UI Black',sans-serif" font-size="200" font-weight="900"
+        fill="url(#textGrad)" filter="url(#glow)"
+        letter-spacing="12">WP</text>
+
+  <!-- paint drips -->
+  <rect x="355" y="250" width="5" rx="2.5" fill="url(#dripMagenta)">
+    <animate attributeName="height" values="0;50;60;0" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3.5s" repeatCount="indefinite"/>
+  </rect>
+  <rect x="430" y="245" width="4" rx="2" fill="url(#dripCyan)">
+    <animate attributeName="height" values="0;40;50;0" dur="4s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="opacity" values="0.6;0.6;0.3;0" dur="4s" repeatCount="indefinite" begin="1s"/>
+  </rect>
+  <rect x="520" y="252" width="5" rx="2.5" fill="url(#dripYellow)">
+    <animate attributeName="height" values="0;45;55;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+    <animate attributeName="opacity" values="0.5;0.5;0.3;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+  </rect>
+
+  <!-- tagline -->
+  <text class="tagline" x="450" y="330" text-anchor="middle"
+        font-size="14" fill="rgba(0,255,255,0.6)" letter-spacing="8">
+    PROACTIVELY PROGRAMMING
+  </text>
+</svg>
