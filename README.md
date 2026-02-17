@@ -1,3 +1,3 @@
 <p align="center">
-  <img src="./banner.svg" alt="WP" width="100%"/>
+  <img src="./banner-primeinc.svg" alt="primeinc" width="100%"/>
 </p>
