@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WP</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Orbitron:wght@900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+    font-family: 'Permanent Marker', cursive;
+  }
+
+  /* ── animated gradient background ── */
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      135deg,
+      #0d0221, #0a0a2e, #150050,
+      #3f0071, #610094, #0d0221,
+      #000428, #004e92, #0d0221
+    );
+    background-size: 600% 600%;
+    animation: gradientShift 12s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ── scanlines overlay (hacker vibe) ── */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* ── grid lines overlay ── */
+  .grid {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* ── floating particles canvas ── */
+  #particles {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* ── main initials ── */
+  .initials-wrap {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .initials {
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(8rem, 28vw, 45rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: transparent;
+    background: linear-gradient(
+      135deg,
+      #ff00ff, #00ffff, #ff00ff,
+      #ffff00, #00ffff, #ff6ec7
+    );
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: textGradient 6s ease infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.4))
+            drop-shadow(0 0 60px rgba(0, 255, 255, 0.3))
+            drop-shadow(0 0 100px rgba(255, 0, 255, 0.2));
+    position: relative;
+  }
+
+  @keyframes textGradient {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ── ghost/echo layers for graffiti depth ── */
+  .ghost {
+    position: absolute;
+    font-family: 'Permanent Marker', cursive;
+    font-size: clamp(8rem, 28vw, 45rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+  }
+
+  .ghost-1 {
+    color: rgba(255, 0, 255, 0.12);
+    text-shadow: 0 0 40px rgba(255, 0, 255, 0.5);
+    transform: translate(-0.6vw, -0.6vh) skewX(-2deg);
+    animation: ghostFloat1 4s ease-in-out infinite;
+  }
+
+  .ghost-2 {
+    color: rgba(0, 255, 255, 0.10);
+    text-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+    transform: translate(0.6vw, 0.6vh) skewX(2deg);
+    animation: ghostFloat2 5s ease-in-out infinite;
+  }
+
+  @keyframes ghostFloat1 {
+    0%, 100% { transform: translate(-0.6vw, -0.6vh) skewX(-2deg); }
+    50%      { transform: translate(-1.2vw, 0.3vh) skewX(-3deg); }
+  }
+
+  @keyframes ghostFloat2 {
+    0%, 100% { transform: translate(0.6vw, 0.6vh) skewX(2deg); }
+    50%      { transform: translate(1.2vw, -0.3vh) skewX(3deg); }
+  }
+
+  /* ── flicker effect ── */
+  .initials {
+    animation: textGradient 6s ease infinite, flicker 8s linear infinite;
+  }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.85; }
+  }
+
+  /* ── drip / paint splatter accents ── */
+  .drip {
+    position: absolute;
+    width: 0.8vw;
+    min-width: 6px;
+    background: linear-gradient(to bottom, #ff00ff, transparent);
+    border-radius: 0 0 50% 50%;
+    opacity: 0.6;
+    animation: dripDown 3s ease-in infinite;
+    z-index: 9;
+  }
+
+  .drip:nth-child(2) {
+    background: linear-gradient(to bottom, #00ffff, transparent);
+    animation-delay: 1s;
+    animation-duration: 4s;
+  }
+
+  .drip:nth-child(3) {
+    background: linear-gradient(to bottom, #ffff00, transparent);
+    animation-delay: 2s;
+    animation-duration: 3.5s;
+  }
+
+  @keyframes dripDown {
+    0%   { height: 0; opacity: 0.7; }
+    80%  { height: 12vh; opacity: 0.5; }
+    100% { height: 16vh; opacity: 0; }
+  }
+
+  /* ── tagline ── */
+  .tagline {
+    position: fixed;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(0.6rem, 1.5vw, 1.2rem);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    z-index: 10;
+    white-space: nowrap;
+  }
+
+  /* ── corner accents ── */
+  .corner {
+    position: fixed;
+    width: clamp(30px, 6vw, 80px);
+    height: clamp(30px, 6vw, 80px);
+    border: 2px solid rgba(0, 255, 255, 0.2);
+    z-index: 10;
+    pointer-events: none;
+  }
+  .corner.tl { top: 3vh; left: 3vw; border-right: none; border-bottom: none; }
+  .corner.tr { top: 3vh; right: 3vw; border-left: none; border-bottom: none; }
+  .corner.bl { bottom: 3vh; left: 3vw; border-right: none; border-top: none; }
+  .corner.br { bottom: 3vh; right: 3vw; border-left: none; border-top: none; }
+
+  /* ── mouse-follow glow (set via JS) ── */
+  .glow-follow {
+    position: fixed;
+    width: 40vmin;
+    height: 40vmin;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 0, 255, 0.08), transparent 70%);
+    pointer-events: none;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+    transition: left 0.3s ease-out, top 0.3s ease-out;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="scanlines"></div>
+  <div class="grid"></div>
+  <canvas id="particles"></canvas>
+  <div class="glow-follow" id="glowFollow"></div>
+
+  <div class="corner tl"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div class="corner br"></div>
+
+  <div class="initials-wrap">
+    <span class="ghost ghost-1">WP</span>
+    <span class="ghost ghost-2">WP</span>
+    <span class="initials" id="mainText">WP</span>
+    <!-- drips attached to the text -->
+    <div class="drip" style="left: 18%; bottom: -2vh;"></div>
+    <div class="drip" style="left: 52%; bottom: -1vh;"></div>
+    <div class="drip" style="left: 78%; bottom: -3vh;"></div>
+  </div>
+
+  <div class="tagline">vincit omnia veritas</div>
+
+<script>
+  // ── Particle system ──
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      this.size = Math.random() * 2 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.6;
+      this.speedY = (Math.random() - 0.5) * 0.6;
+      this.opacity = Math.random() * 0.5 + 0.1;
+      const colors = ['255,0,255', '0,255,255', '255,255,0', '255,110,199'];
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
+      ctx.fill();
+    }
+  }
+
+  const count = Math.min(120, Math.floor((W * H) / 12000));
+  for (let i = 0; i < count; i++) particles.push(new Particle());
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  // ── Mouse-follow glow ──
+  const glow = document.getElementById('glowFollow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+
+  // ── Subtle parallax tilt on initials ──
+  const wrap = document.querySelector('.initials-wrap');
+  document.addEventListener('mousemove', e => {
+    const cx = (e.clientX / W - 0.5) * 2;
+    const cy = (e.clientY / H - 0.5) * 2;
+    wrap.style.transform = `perspective(800px) rotateY(${cx * 4}deg) rotateX(${-cy * 4}deg)`;
+  });
+</script>
+
+</body>
+</html>

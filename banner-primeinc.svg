@@ -1,164 +1,103 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="100%">
   <defs>
     <style>
-      /* ── ghost float ── */
       @keyframes ghostFloat1 {
         0%, 100% { transform: translate(-4px, -4px) skewX(-2deg); opacity: 0.15; }
-        50%      { transform: translate(-8px, 2px) skewX(-3deg); opacity: 0.10; }
+        50%       { transform: translate(-8px, 2px) skewX(-3deg); opacity: 0.10; }
       }
       @keyframes ghostFloat2 {
         0%, 100% { transform: translate(4px, 4px) skewX(2deg); opacity: 0.12; }
-        50%      { transform: translate(8px, -2px) skewX(3deg); opacity: 0.08; }
+        50%       { transform: translate(8px, -2px) skewX(3deg); opacity: 0.08; }
       }
-
-      /* ── flicker ── */
       @keyframes flicker {
         0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
         20%, 24%, 55% { opacity: 0.85; }
       }
-
-      /* ── particle drift ── */
       @keyframes particleDrift1 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        10%  { opacity: 0.6; }
-        90%  { opacity: 0.6; }
-        100% { transform: translate(60px, -80px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        10%  { opacity: 0.6; } 90% { opacity: 0.6; }
+        100% { transform: translate(60px,-80px); opacity: 0; }
       }
       @keyframes particleDrift2 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        10%  { opacity: 0.4; }
-        90%  { opacity: 0.4; }
-        100% { transform: translate(-50px, -60px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        10%  { opacity: 0.4; } 90% { opacity: 0.4; }
+        100% { transform: translate(-50px,-60px); opacity: 0; }
       }
       @keyframes particleDrift3 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        10%  { opacity: 0.5; }
-        90%  { opacity: 0.5; }
-        100% { transform: translate(40px, 70px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        10%  { opacity: 0.5; } 90% { opacity: 0.5; }
+        100% { transform: translate(40px,70px); opacity: 0; }
       }
       @keyframes particleDrift4 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        15%  { opacity: 0.3; }
-        85%  { opacity: 0.3; }
-        100% { transform: translate(-70px, 50px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        15%  { opacity: 0.3; } 85% { opacity: 0.3; }
+        100% { transform: translate(-70px,50px); opacity: 0; }
       }
-
-      /* ── scanline scroll ── */
-      @keyframes scanScroll {
-        0%   { transform: translateY(0); }
-        100% { transform: translateY(8px); }
-      }
-
-      /* ── tagline pulse ── */
-      @keyframes tagPulse {
-        0%, 100% { opacity: 0.5; }
-        50%      { opacity: 0.8; }
-      }
+      @keyframes scanScroll  { 0% { transform: translateY(0); } 100% { transform: translateY(8px); } }
+      @keyframes tagPulse    { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
 
       .main-text { animation: flicker 8s linear infinite; }
-      .ghost1 { animation: ghostFloat1 4s ease-in-out infinite; }
-      .ghost2 { animation: ghostFloat2 5s ease-in-out infinite; }
-      .tagline { animation: tagPulse 4s ease-in-out infinite; }
+      .ghost1    { animation: ghostFloat1 4s ease-in-out infinite; }
+      .ghost2    { animation: ghostFloat2 5s ease-in-out infinite; }
+      .tagline   { animation: tagPulse 4s ease-in-out infinite; }
       .scanlines { animation: scanScroll 0.5s linear infinite; }
     </style>
 
-    <!-- background gradient -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%"   style="stop-color:#0d0221"><animate attributeName="stop-color" values="#0d0221;#150050;#3f0071;#000428;#0d0221" dur="12s" repeatCount="indefinite"/></stop>
       <stop offset="50%"  style="stop-color:#150050"><animate attributeName="stop-color" values="#150050;#610094;#004e92;#0d0221;#150050" dur="12s" repeatCount="indefinite"/></stop>
       <stop offset="100%" style="stop-color:#000428"><animate attributeName="stop-color" values="#000428;#0d0221;#150050;#610094;#000428" dur="12s" repeatCount="indefinite"/></stop>
     </linearGradient>
 
-    <!-- text gradient -->
     <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%"><animate attributeName="stop-color" values="#ff00ff;#00ffff;#ffff00;#ff00ff" dur="6s" repeatCount="indefinite"/></stop>
       <stop offset="50%"><animate attributeName="stop-color" values="#00ffff;#ff6ec7;#ff00ff;#00ffff" dur="6s" repeatCount="indefinite"/></stop>
       <stop offset="100%"><animate attributeName="stop-color" values="#ffff00;#ff00ff;#00ffff;#ffff00" dur="6s" repeatCount="indefinite"/></stop>
     </linearGradient>
 
-    <!-- glow filter -->
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1"/>
-      <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur2"/>
-      <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur3"/>
-      <feMerge>
-        <feMergeNode in="blur3"/>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="b2"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="b3"/>
+      <feMerge><feMergeNode in="b3"/><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
-    <!-- ghost glow filters -->
     <filter id="glowMagenta" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0.3  0 0 0 0 0  0 0 0 0 0.3  0 0 0 1 0"/>
+      <feGaussianBlur stdDeviation="10"/><feColorMatrix type="matrix" values="1 0 0 0 .3 0 0 0 0 0 0 0 0 0 .3 0 0 0 1 0"/>
     </filter>
     <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0.3  0 0 0 0 0.3  0 0 0 1 0"/>
+      <feGaussianBlur stdDeviation="10"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 .3 0 0 0 0 .3 0 0 0 1 0"/>
     </filter>
 
-    <!-- drip gradients -->
-    <linearGradient id="dripMagenta" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff00ff" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#ff00ff" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="dripCyan" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#00ffff" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#00ffff" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="dripYellow" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffff00" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ffff00" stop-opacity="0"/>
-    </linearGradient>
+    <linearGradient id="dripMagenta" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff00ff" stop-opacity=".7"/><stop offset="100%" stop-color="#ff00ff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="dripCyan"    x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00ffff" stop-opacity=".6"/><stop offset="100%" stop-color="#00ffff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="dripYellow"  x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffff00" stop-opacity=".5"/><stop offset="100%" stop-color="#ffff00" stop-opacity="0"/></linearGradient>
 
-    <!-- scanline pattern -->
-    <pattern id="scanPattern" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect width="4" height="2" fill="transparent"/>
-      <rect y="2" width="4" height="2" fill="rgba(0,0,0,0.12)"/>
-    </pattern>
-
-    <!-- grid pattern -->
-    <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,255,255,0.04)" stroke-width="0.5"/>
-    </pattern>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="2" fill="transparent"/><rect y="2" width="4" height="2" fill="rgba(0,0,0,.12)"/></pattern>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0L0 0 0 50" fill="none" stroke="rgba(0,255,255,.04)" stroke-width=".5"/></pattern>
   </defs>
 
-  <!-- background -->
   <rect width="900" height="400" rx="12" fill="url(#bgGrad)"/>
+  <rect width="900" height="400" rx="12" fill="url(#grid)"/>
+  <g class="scanlines"><rect width="900" height="420" y="-10" fill="url(#scan)"/></g>
 
-  <!-- grid overlay -->
-  <rect width="900" height="400" rx="12" fill="url(#gridPattern)"/>
+  <circle cx="120" cy="80"  r="1.5" fill="#ff00ff" style="animation:particleDrift1 7s linear infinite"/>
+  <circle cx="250" cy="320" r="1"   fill="#00ffff" style="animation:particleDrift2 9s linear infinite;animation-delay:1s"/>
+  <circle cx="400" cy="60"  r="2"   fill="#ffff00" style="animation:particleDrift3 6s linear infinite;animation-delay:.5s"/>
+  <circle cx="600" cy="340" r="1.5" fill="#ff6ec7" style="animation:particleDrift4 8s linear infinite;animation-delay:2s"/>
+  <circle cx="750" cy="100" r="1"   fill="#00ffff" style="animation:particleDrift1 10s linear infinite;animation-delay:3s"/>
+  <circle cx="800" cy="280" r="2"   fill="#ff00ff" style="animation:particleDrift2 7s linear infinite;animation-delay:4s"/>
+  <circle cx="50"  cy="200" r="1.5" fill="#ffff00" style="animation:particleDrift3 9s linear infinite;animation-delay:1.5s"/>
+  <circle cx="500" cy="350" r="1"   fill="#ff6ec7" style="animation:particleDrift4 6s linear infinite;animation-delay:2.5s"/>
+  <circle cx="320" cy="150" r="1.8" fill="#00ffff" style="animation:particleDrift1 8s linear infinite;animation-delay:.8s"/>
+  <circle cx="680" cy="200" r="1.2" fill="#ff00ff" style="animation:particleDrift2 11s linear infinite;animation-delay:3.5s"/>
+  <circle cx="150" cy="300" r="1.5" fill="#ffff00" style="animation:particleDrift3 7s linear infinite;animation-delay:5s"/>
+  <circle cx="850" cy="150" r="1"   fill="#00ffff" style="animation:particleDrift4 9s linear infinite;animation-delay:1.2s"/>
 
-  <!-- scanlines -->
-  <g class="scanlines" clip-path="inset(0 round 12px)">
-    <rect width="900" height="420" y="-10" fill="url(#scanPattern)"/>
+  <g stroke="rgba(0,255,255,.25)" stroke-width="2" fill="none">
+    <path d="M30,55 L30,30 L55,30"/><path d="M870,55 L870,30 L845,30"/>
+    <path d="M30,345 L30,370 L55,370"/><path d="M870,345 L870,370 L845,370"/>
   </g>
 
-  <!-- floating particles -->
-  <circle cx="120" cy="80"  r="1.5" fill="#ff00ff" style="animation: particleDrift1 7s linear infinite"/>
-  <circle cx="250" cy="320" r="1"   fill="#00ffff" style="animation: particleDrift2 9s linear infinite; animation-delay: 1s"/>
-  <circle cx="400" cy="60"  r="2"   fill="#ffff00" style="animation: particleDrift3 6s linear infinite; animation-delay: 0.5s"/>
-  <circle cx="600" cy="340" r="1.5" fill="#ff6ec7" style="animation: particleDrift4 8s linear infinite; animation-delay: 2s"/>
-  <circle cx="750" cy="100" r="1"   fill="#00ffff" style="animation: particleDrift1 10s linear infinite; animation-delay: 3s"/>
-  <circle cx="800" cy="280" r="2"   fill="#ff00ff" style="animation: particleDrift2 7s linear infinite; animation-delay: 4s"/>
-  <circle cx="50"  cy="200" r="1.5" fill="#ffff00" style="animation: particleDrift3 9s linear infinite; animation-delay: 1.5s"/>
-  <circle cx="500" cy="350" r="1"   fill="#ff6ec7" style="animation: particleDrift4 6s linear infinite; animation-delay: 2.5s"/>
-  <circle cx="320" cy="150" r="1.8" fill="#00ffff" style="animation: particleDrift1 8s linear infinite; animation-delay: 0.8s"/>
-  <circle cx="680" cy="200" r="1.2" fill="#ff00ff" style="animation: particleDrift2 11s linear infinite; animation-delay: 3.5s"/>
-  <circle cx="150" cy="300" r="1.5" fill="#ffff00" style="animation: particleDrift3 7s linear infinite; animation-delay: 5s"/>
-  <circle cx="850" cy="150" r="1"   fill="#00ffff" style="animation: particleDrift4 9s linear infinite; animation-delay: 1.2s"/>
-
-  <!-- corner brackets -->
-  <g stroke="rgba(0,255,255,0.25)" stroke-width="2" fill="none">
-    <path d="M 30,55 L 30,30 L 55,30"/>
-    <path d="M 870,55 L 870,30 L 845,30"/>
-    <path d="M 30,345 L 30,370 L 55,370"/>
-    <path d="M 870,345 L 870,370 L 845,370"/>
-  </g>
-
-  <!-- ghost layer 1 (magenta) -->
   <g transform="translate(181.8,225)" class="ghost1" fill="#ff00ff" filter="url(#glowMagenta)" opacity="0.15">
     <path transform="translate(0.0,0) scale(0.117188,-0.117188)" d="M377 620Q419 615 452.0 603.0Q485 591 508 571Q524 546 538.5 517.0Q553 488 560.5 456.5Q568 425 567.5 392.0Q567 359 553 325Q524 289 482.5 266.5Q441 244 393.0 230.0Q345 216 293.5 206.0Q242 196 193 186Q194 163 193.5 137.5Q193 112 188.5 86.5Q184 61 175.0 37.0Q166 13 151 -7Q134 -7 116.0 -11.5Q98 -16 84 -19Q77 -15 71.5 -11.5Q66 -8 56 -7Q58 3 51.0 13.5Q44 24 37.0 35.0Q30 46 27.5 56.0Q25 66 37 75Q30 82 30 93Q37 105 42.5 126.0Q48 147 51.5 167.5Q55 188 53.0 205.0Q51 222 33 230Q34 232 37.0 232.0Q40 232 43 233Q35 239 33.5 250.0Q32 261 26 269Q28 274 29.0 278.0Q30 282 36 281Q33 299 36.5 315.0Q40 331 47.0 345.5Q54 360 64.0 374.0Q74 388 83 402Q90 403 91.5 400.0Q93 397 98 401Q111 411 116.0 422.0Q121 433 121 447Q128 468 138.0 489.5Q148 511 160.0 529.0Q172 547 186.5 561.0Q201 575 217 582Q229 592 247.0 600.5Q265 609 286.0 613.5Q307 618 328.5 618.5Q350 619 368 614Q373 612 373.5 616.0Q374 620 377 620ZM336 381Q361 392 389.5 398.5Q418 405 437 423Q425 434 402.0 442.5Q379 451 352.0 453.0Q325 455 297.5 448.5Q270 442 250 424Q244 406 240.0 395.5Q236 385 229 370Q231 365 235.5 362.5Q240 360 242 355Q265 367 288.5 368.5Q312 370 336 381Z"/>
     <path transform="translate(68.9,0) scale(0.117188,-0.117188)" d="M161 104Q150 64 141.5 43.5Q133 23 116 1Q103 3 98.0 -2.0Q93 -7 87 -11Q78 -13 74.0 -11.0Q70 -9 67.0 -6.5Q64 -4 59.5 -1.5Q55 1 46 1Q44 9 41.5 16.0Q39 23 28 21Q30 29 29.0 34.5Q28 40 26.5 44.5Q25 49 24.0 53.5Q23 58 25 65Q20 65 17.0 72.0Q14 79 10 86Q13 104 16.0 120.0Q19 136 23.5 150.0Q28 164 31.0 178.0Q34 192 28 207Q32 204 34.0 208.5Q36 213 37.0 220.5Q38 228 38.0 235.5Q38 243 37 248Q47 274 53.5 301.5Q60 329 65.5 356.0Q71 383 77.0 409.0Q83 435 93 457Q104 459 117.5 454.5Q131 450 134 443Q160 463 180.0 491.5Q200 520 221.0 547.0Q242 574 267.5 595.0Q293 616 332 620Q352 605 376.5 589.5Q401 574 417 549Q425 545 430.5 540.5Q436 536 444 531V519Q456 508 463.5 493.5Q471 479 477.0 462.5Q483 446 489.0 429.5Q495 413 503 398Q501 393 501.0 389.5Q501 386 502.5 382.0Q504 378 505.0 374.0Q506 370 505 363Q502 319 476.5 292.0Q451 265 415.0 247.5Q379 230 338.0 218.0Q297 206 264 192Q264 188 267.5 188.0Q271 188 270 183Q294 168 308.0 159.0Q322 150 334.5 144.0Q347 138 361.5 133.5Q376 129 402 123Q428 117 442.5 113.5Q457 110 469.0 107.5Q481 105 493.5 103.5Q506 102 529 100Q538 91 544.5 78.5Q551 66 553.0 53.5Q555 41 554.0 29.5Q553 18 547 11Q548 8 551.5 8.5Q555 9 559 8Q553 4 549.0 -2.0Q545 -8 541.0 -14.0Q537 -20 532.0 -24.5Q527 -29 518 -30Q487 -42 440.0 -31.5Q393 -21 321 7Q285 21 262.5 31.5Q240 42 223.5 52.5Q207 63 193.5 75.0Q180 87 161 104ZM304 447Q293 431 279.5 418.0Q266 405 253.5 391.5Q241 378 231.0 361.5Q221 345 217 323Q252 327 290.0 342.5Q328 358 362 372Q358 403 340.5 422.0Q323 441 304 447Z"/>
@@ -169,8 +108,6 @@
     <path transform="translate(401.0,0) scale(0.117188,-0.117188)" d="M205 182Q196 180 192.0 171.5Q188 163 184.5 154.0Q181 145 177.5 137.5Q174 130 167 130Q166 122 161.5 116.0Q157 110 153.0 103.5Q149 97 147.0 89.5Q145 82 149 72Q141 66 139.0 55.0Q137 44 134.5 34.0Q132 24 126.0 17.0Q120 10 104 11Q101 7 103.0 6.0Q105 5 106 -1Q95 1 89.5 -2.5Q84 -6 76 -7Q57 -1 44.5 14.0Q32 29 22.5 47.5Q13 66 5.5 85.0Q-2 104 -9 118Q-6 129 -8.0 139.5Q-10 150 -15 157Q34 261 92.0 379.0Q150 497 202 612Q225 603 247.5 591.5Q270 580 288.5 565.0Q307 550 320.0 530.5Q333 511 337 487Q335 481 332.5 482.5Q330 484 328 481Q332 476 332.5 474.0Q333 472 332.5 470.0Q332 468 332.0 464.5Q332 461 335 455Q331 456 329.5 454.0Q328 452 323 454Q327 443 325.5 436.0Q324 429 321.0 423.5Q318 418 316.0 411.5Q314 405 317 395Q314 395 312.5 393.5Q311 392 310.0 390.5Q309 389 307.5 387.5Q306 386 303 387Q306 365 305.0 343.0Q304 321 303.5 298.5Q303 276 304.0 251.5Q305 227 311 201Q347 222 368.5 255.0Q390 288 403.5 329.0Q417 370 424.0 417.0Q431 464 439 513Q448 522 453.0 535.0Q458 548 462.0 562.5Q466 577 470.0 591.5Q474 606 480 618Q495 616 505.5 608.5Q516 601 525.0 592.5Q534 584 544.0 576.5Q554 569 569 567Q581 550 591.0 534.0Q601 518 604 500Q599 492 596.5 482.0Q594 472 591.0 462.0Q588 452 583.0 443.5Q578 435 569 429Q566 403 561.5 381.5Q557 360 552.5 339.0Q548 318 545.0 295.5Q542 273 543 246Q535 223 526.0 197.0Q517 171 512 150Q496 137 487.0 119.0Q478 101 468 83Q464 79 463.0 81.0Q462 83 456 84Q457 80 456.0 78.0Q455 76 453.5 74.5Q452 73 451.5 70.0Q451 67 453 62Q439 56 428.0 45.0Q417 34 404.5 25.0Q392 16 374.5 13.0Q357 10 329 20Q288 50 256.5 89.0Q225 128 205 182Z"/>
     <path transform="translate(474.8,0) scale(0.117188,-0.117188)" d="M416 -2Q400 -3 376.5 -1.0Q353 1 333 -8Q280 -6 225.0 5.0Q170 16 124 32Q114 43 104.0 52.5Q94 62 77 66Q53 85 38.0 112.5Q23 140 14.0 171.0Q5 202 2.0 234.5Q-1 267 0 297Q15 342 42.5 374.5Q70 407 99 439Q112 445 118.5 451.5Q125 458 132.5 463.5Q140 469 147.5 474.5Q155 480 161 488Q182 493 197.5 502.5Q213 512 228.0 522.5Q243 533 259.0 542.0Q275 551 296 556Q304 565 315.0 570.5Q326 576 337.5 581.5Q349 587 359.5 593.0Q370 599 376 609Q381 601 390.0 603.5Q399 606 407 609Q412 610 415.5 607.0Q419 604 422.0 601.0Q425 598 427.5 597.5Q430 597 432 602Q437 602 435.0 597.0Q433 592 432 590Q440 591 445.5 586.5Q451 582 463 581Q467 576 465.0 573.5Q463 571 463 565Q493 556 501.0 536.5Q509 517 502.0 496.0Q495 475 477.0 457.0Q459 439 438 433Q390 420 347.5 404.5Q305 389 278 359Q254 352 235.5 340.5Q217 329 200.5 314.5Q184 300 169.5 284.5Q155 269 139 254Q140 240 134.5 232.5Q129 225 124 217Q126 202 131.0 190.5Q136 179 142 168Q208 148 282.5 143.0Q357 138 432 137Q439 127 448.5 118.5Q458 110 466.0 100.5Q474 91 479.0 79.5Q484 68 481 51Q467 36 450.0 23.5Q433 11 416 -2Z"/>
   </g>
-
-  <!-- ghost layer 2 (cyan) -->
   <g transform="translate(181.8,225)" class="ghost2" fill="#00ffff" filter="url(#glowCyan)" opacity="0.12">
     <path transform="translate(0.0,0) scale(0.117188,-0.117188)" d="M377 620Q419 615 452.0 603.0Q485 591 508 571Q524 546 538.5 517.0Q553 488 560.5 456.5Q568 425 567.5 392.0Q567 359 553 325Q524 289 482.5 266.5Q441 244 393.0 230.0Q345 216 293.5 206.0Q242 196 193 186Q194 163 193.5 137.5Q193 112 188.5 86.5Q184 61 175.0 37.0Q166 13 151 -7Q134 -7 116.0 -11.5Q98 -16 84 -19Q77 -15 71.5 -11.5Q66 -8 56 -7Q58 3 51.0 13.5Q44 24 37.0 35.0Q30 46 27.5 56.0Q25 66 37 75Q30 82 30 93Q37 105 42.5 126.0Q48 147 51.5 167.5Q55 188 53.0 205.0Q51 222 33 230Q34 232 37.0 232.0Q40 232 43 233Q35 239 33.5 250.0Q32 261 26 269Q28 274 29.0 278.0Q30 282 36 281Q33 299 36.5 315.0Q40 331 47.0 345.5Q54 360 64.0 374.0Q74 388 83 402Q90 403 91.5 400.0Q93 397 98 401Q111 411 116.0 422.0Q121 433 121 447Q128 468 138.0 489.5Q148 511 160.0 529.0Q172 547 186.5 561.0Q201 575 217 582Q229 592 247.0 600.5Q265 609 286.0 613.5Q307 618 328.5 618.5Q350 619 368 614Q373 612 373.5 616.0Q374 620 377 620ZM336 381Q361 392 389.5 398.5Q418 405 437 423Q425 434 402.0 442.5Q379 451 352.0 453.0Q325 455 297.5 448.5Q270 442 250 424Q244 406 240.0 395.5Q236 385 229 370Q231 365 235.5 362.5Q240 360 242 355Q265 367 288.5 368.5Q312 370 336 381Z"/>
     <path transform="translate(68.9,0) scale(0.117188,-0.117188)" d="M161 104Q150 64 141.5 43.5Q133 23 116 1Q103 3 98.0 -2.0Q93 -7 87 -11Q78 -13 74.0 -11.0Q70 -9 67.0 -6.5Q64 -4 59.5 -1.5Q55 1 46 1Q44 9 41.5 16.0Q39 23 28 21Q30 29 29.0 34.5Q28 40 26.5 44.5Q25 49 24.0 53.5Q23 58 25 65Q20 65 17.0 72.0Q14 79 10 86Q13 104 16.0 120.0Q19 136 23.5 150.0Q28 164 31.0 178.0Q34 192 28 207Q32 204 34.0 208.5Q36 213 37.0 220.5Q38 228 38.0 235.5Q38 243 37 248Q47 274 53.5 301.5Q60 329 65.5 356.0Q71 383 77.0 409.0Q83 435 93 457Q104 459 117.5 454.5Q131 450 134 443Q160 463 180.0 491.5Q200 520 221.0 547.0Q242 574 267.5 595.0Q293 616 332 620Q352 605 376.5 589.5Q401 574 417 549Q425 545 430.5 540.5Q436 536 444 531V519Q456 508 463.5 493.5Q471 479 477.0 462.5Q483 446 489.0 429.5Q495 413 503 398Q501 393 501.0 389.5Q501 386 502.5 382.0Q504 378 505.0 374.0Q506 370 505 363Q502 319 476.5 292.0Q451 265 415.0 247.5Q379 230 338.0 218.0Q297 206 264 192Q264 188 267.5 188.0Q271 188 270 183Q294 168 308.0 159.0Q322 150 334.5 144.0Q347 138 361.5 133.5Q376 129 402 123Q428 117 442.5 113.5Q457 110 469.0 107.5Q481 105 493.5 103.5Q506 102 529 100Q538 91 544.5 78.5Q551 66 553.0 53.5Q555 41 554.0 29.5Q553 18 547 11Q548 8 551.5 8.5Q555 9 559 8Q553 4 549.0 -2.0Q545 -8 541.0 -14.0Q537 -20 532.0 -24.5Q527 -29 518 -30Q487 -42 440.0 -31.5Q393 -21 321 7Q285 21 262.5 31.5Q240 42 223.5 52.5Q207 63 193.5 75.0Q180 87 161 104ZM304 447Q293 431 279.5 418.0Q266 405 253.5 391.5Q241 378 231.0 361.5Q221 345 217 323Q252 327 290.0 342.5Q328 358 362 372Q358 403 340.5 422.0Q323 441 304 447Z"/>
@@ -181,8 +118,6 @@
     <path transform="translate(401.0,0) scale(0.117188,-0.117188)" d="M205 182Q196 180 192.0 171.5Q188 163 184.5 154.0Q181 145 177.5 137.5Q174 130 167 130Q166 122 161.5 116.0Q157 110 153.0 103.5Q149 97 147.0 89.5Q145 82 149 72Q141 66 139.0 55.0Q137 44 134.5 34.0Q132 24 126.0 17.0Q120 10 104 11Q101 7 103.0 6.0Q105 5 106 -1Q95 1 89.5 -2.5Q84 -6 76 -7Q57 -1 44.5 14.0Q32 29 22.5 47.5Q13 66 5.5 85.0Q-2 104 -9 118Q-6 129 -8.0 139.5Q-10 150 -15 157Q34 261 92.0 379.0Q150 497 202 612Q225 603 247.5 591.5Q270 580 288.5 565.0Q307 550 320.0 530.5Q333 511 337 487Q335 481 332.5 482.5Q330 484 328 481Q332 476 332.5 474.0Q333 472 332.5 470.0Q332 468 332.0 464.5Q332 461 335 455Q331 456 329.5 454.0Q328 452 323 454Q327 443 325.5 436.0Q324 429 321.0 423.5Q318 418 316.0 411.5Q314 405 317 395Q314 395 312.5 393.5Q311 392 310.0 390.5Q309 389 307.5 387.5Q306 386 303 387Q306 365 305.0 343.0Q304 321 303.5 298.5Q303 276 304.0 251.5Q305 227 311 201Q347 222 368.5 255.0Q390 288 403.5 329.0Q417 370 424.0 417.0Q431 464 439 513Q448 522 453.0 535.0Q458 548 462.0 562.5Q466 577 470.0 591.5Q474 606 480 618Q495 616 505.5 608.5Q516 601 525.0 592.5Q534 584 544.0 576.5Q554 569 569 567Q581 550 591.0 534.0Q601 518 604 500Q599 492 596.5 482.0Q594 472 591.0 462.0Q588 452 583.0 443.5Q578 435 569 429Q566 403 561.5 381.5Q557 360 552.5 339.0Q548 318 545.0 295.5Q542 273 543 246Q535 223 526.0 197.0Q517 171 512 150Q496 137 487.0 119.0Q478 101 468 83Q464 79 463.0 81.0Q462 83 456 84Q457 80 456.0 78.0Q455 76 453.5 74.5Q452 73 451.5 70.0Q451 67 453 62Q439 56 428.0 45.0Q417 34 404.5 25.0Q392 16 374.5 13.0Q357 10 329 20Q288 50 256.5 89.0Q225 128 205 182Z"/>
     <path transform="translate(474.8,0) scale(0.117188,-0.117188)" d="M416 -2Q400 -3 376.5 -1.0Q353 1 333 -8Q280 -6 225.0 5.0Q170 16 124 32Q114 43 104.0 52.5Q94 62 77 66Q53 85 38.0 112.5Q23 140 14.0 171.0Q5 202 2.0 234.5Q-1 267 0 297Q15 342 42.5 374.5Q70 407 99 439Q112 445 118.5 451.5Q125 458 132.5 463.5Q140 469 147.5 474.5Q155 480 161 488Q182 493 197.5 502.5Q213 512 228.0 522.5Q243 533 259.0 542.0Q275 551 296 556Q304 565 315.0 570.5Q326 576 337.5 581.5Q349 587 359.5 593.0Q370 599 376 609Q381 601 390.0 603.5Q399 606 407 609Q412 610 415.5 607.0Q419 604 422.0 601.0Q425 598 427.5 597.5Q430 597 432 602Q437 602 435.0 597.0Q433 592 432 590Q440 591 445.5 586.5Q451 582 463 581Q467 576 465.0 573.5Q463 571 463 565Q493 556 501.0 536.5Q509 517 502.0 496.0Q495 475 477.0 457.0Q459 439 438 433Q390 420 347.5 404.5Q305 389 278 359Q254 352 235.5 340.5Q217 329 200.5 314.5Q184 300 169.5 284.5Q155 269 139 254Q140 240 134.5 232.5Q129 225 124 217Q126 202 131.0 190.5Q136 179 142 168Q208 148 282.5 143.0Q357 138 432 137Q439 127 448.5 118.5Q458 110 466.0 100.5Q474 91 479.0 79.5Q484 68 481 51Q467 36 450.0 23.5Q433 11 416 -2Z"/>
   </g>
-
-  <!-- main text -->
   <g transform="translate(181.8,225)" class="main-text" fill="url(#textGrad)" filter="url(#glow)">
     <path transform="translate(0.0,0) scale(0.117188,-0.117188)" d="M377 620Q419 615 452.0 603.0Q485 591 508 571Q524 546 538.5 517.0Q553 488 560.5 456.5Q568 425 567.5 392.0Q567 359 553 325Q524 289 482.5 266.5Q441 244 393.0 230.0Q345 216 293.5 206.0Q242 196 193 186Q194 163 193.5 137.5Q193 112 188.5 86.5Q184 61 175.0 37.0Q166 13 151 -7Q134 -7 116.0 -11.5Q98 -16 84 -19Q77 -15 71.5 -11.5Q66 -8 56 -7Q58 3 51.0 13.5Q44 24 37.0 35.0Q30 46 27.5 56.0Q25 66 37 75Q30 82 30 93Q37 105 42.5 126.0Q48 147 51.5 167.5Q55 188 53.0 205.0Q51 222 33 230Q34 232 37.0 232.0Q40 232 43 233Q35 239 33.5 250.0Q32 261 26 269Q28 274 29.0 278.0Q30 282 36 281Q33 299 36.5 315.0Q40 331 47.0 345.5Q54 360 64.0 374.0Q74 388 83 402Q90 403 91.5 400.0Q93 397 98 401Q111 411 116.0 422.0Q121 433 121 447Q128 468 138.0 489.5Q148 511 160.0 529.0Q172 547 186.5 561.0Q201 575 217 582Q229 592 247.0 600.5Q265 609 286.0 613.5Q307 618 328.5 618.5Q350 619 368 614Q373 612 373.5 616.0Q374 620 377 620ZM336 381Q361 392 389.5 398.5Q418 405 437 423Q425 434 402.0 442.5Q379 451 352.0 453.0Q325 455 297.5 448.5Q270 442 250 424Q244 406 240.0 395.5Q236 385 229 370Q231 365 235.5 362.5Q240 360 242 355Q265 367 288.5 368.5Q312 370 336 381Z"/>
     <path transform="translate(68.9,0) scale(0.117188,-0.117188)" d="M161 104Q150 64 141.5 43.5Q133 23 116 1Q103 3 98.0 -2.0Q93 -7 87 -11Q78 -13 74.0 -11.0Q70 -9 67.0 -6.5Q64 -4 59.5 -1.5Q55 1 46 1Q44 9 41.5 16.0Q39 23 28 21Q30 29 29.0 34.5Q28 40 26.5 44.5Q25 49 24.0 53.5Q23 58 25 65Q20 65 17.0 72.0Q14 79 10 86Q13 104 16.0 120.0Q19 136 23.5 150.0Q28 164 31.0 178.0Q34 192 28 207Q32 204 34.0 208.5Q36 213 37.0 220.5Q38 228 38.0 235.5Q38 243 37 248Q47 274 53.5 301.5Q60 329 65.5 356.0Q71 383 77.0 409.0Q83 435 93 457Q104 459 117.5 454.5Q131 450 134 443Q160 463 180.0 491.5Q200 520 221.0 547.0Q242 574 267.5 595.0Q293 616 332 620Q352 605 376.5 589.5Q401 574 417 549Q425 545 430.5 540.5Q436 536 444 531V519Q456 508 463.5 493.5Q471 479 477.0 462.5Q483 446 489.0 429.5Q495 413 503 398Q501 393 501.0 389.5Q501 386 502.5 382.0Q504 378 505.0 374.0Q506 370 505 363Q502 319 476.5 292.0Q451 265 415.0 247.5Q379 230 338.0 218.0Q297 206 264 192Q264 188 267.5 188.0Q271 188 270 183Q294 168 308.0 159.0Q322 150 334.5 144.0Q347 138 361.5 133.5Q376 129 402 123Q428 117 442.5 113.5Q457 110 469.0 107.5Q481 105 493.5 103.5Q506 102 529 100Q538 91 544.5 78.5Q551 66 553.0 53.5Q555 41 554.0 29.5Q553 18 547 11Q548 8 551.5 8.5Q555 9 559 8Q553 4 549.0 -2.0Q545 -8 541.0 -14.0Q537 -20 532.0 -24.5Q527 -29 518 -30Q487 -42 440.0 -31.5Q393 -21 321 7Q285 21 262.5 31.5Q240 42 223.5 52.5Q207 63 193.5 75.0Q180 87 161 104ZM304 447Q293 431 279.5 418.0Q266 405 253.5 391.5Q241 378 231.0 361.5Q221 345 217 323Q252 327 290.0 342.5Q328 358 362 372Q358 403 340.5 422.0Q323 441 304 447Z"/>
@@ -193,26 +128,22 @@
     <path transform="translate(401.0,0) scale(0.117188,-0.117188)" d="M205 182Q196 180 192.0 171.5Q188 163 184.5 154.0Q181 145 177.5 137.5Q174 130 167 130Q166 122 161.5 116.0Q157 110 153.0 103.5Q149 97 147.0 89.5Q145 82 149 72Q141 66 139.0 55.0Q137 44 134.5 34.0Q132 24 126.0 17.0Q120 10 104 11Q101 7 103.0 6.0Q105 5 106 -1Q95 1 89.5 -2.5Q84 -6 76 -7Q57 -1 44.5 14.0Q32 29 22.5 47.5Q13 66 5.5 85.0Q-2 104 -9 118Q-6 129 -8.0 139.5Q-10 150 -15 157Q34 261 92.0 379.0Q150 497 202 612Q225 603 247.5 591.5Q270 580 288.5 565.0Q307 550 320.0 530.5Q333 511 337 487Q335 481 332.5 482.5Q330 484 328 481Q332 476 332.5 474.0Q333 472 332.5 470.0Q332 468 332.0 464.5Q332 461 335 455Q331 456 329.5 454.0Q328 452 323 454Q327 443 325.5 436.0Q324 429 321.0 423.5Q318 418 316.0 411.5Q314 405 317 395Q314 395 312.5 393.5Q311 392 310.0 390.5Q309 389 307.5 387.5Q306 386 303 387Q306 365 305.0 343.0Q304 321 303.5 298.5Q303 276 304.0 251.5Q305 227 311 201Q347 222 368.5 255.0Q390 288 403.5 329.0Q417 370 424.0 417.0Q431 464 439 513Q448 522 453.0 535.0Q458 548 462.0 562.5Q466 577 470.0 591.5Q474 606 480 618Q495 616 505.5 608.5Q516 601 525.0 592.5Q534 584 544.0 576.5Q554 569 569 567Q581 550 591.0 534.0Q601 518 604 500Q599 492 596.5 482.0Q594 472 591.0 462.0Q588 452 583.0 443.5Q578 435 569 429Q566 403 561.5 381.5Q557 360 552.5 339.0Q548 318 545.0 295.5Q542 273 543 246Q535 223 526.0 197.0Q517 171 512 150Q496 137 487.0 119.0Q478 101 468 83Q464 79 463.0 81.0Q462 83 456 84Q457 80 456.0 78.0Q455 76 453.5 74.5Q452 73 451.5 70.0Q451 67 453 62Q439 56 428.0 45.0Q417 34 404.5 25.0Q392 16 374.5 13.0Q357 10 329 20Q288 50 256.5 89.0Q225 128 205 182Z"/>
     <path transform="translate(474.8,0) scale(0.117188,-0.117188)" d="M416 -2Q400 -3 376.5 -1.0Q353 1 333 -8Q280 -6 225.0 5.0Q170 16 124 32Q114 43 104.0 52.5Q94 62 77 66Q53 85 38.0 112.5Q23 140 14.0 171.0Q5 202 2.0 234.5Q-1 267 0 297Q15 342 42.5 374.5Q70 407 99 439Q112 445 118.5 451.5Q125 458 132.5 463.5Q140 469 147.5 474.5Q155 480 161 488Q182 493 197.5 502.5Q213 512 228.0 522.5Q243 533 259.0 542.0Q275 551 296 556Q304 565 315.0 570.5Q326 576 337.5 581.5Q349 587 359.5 593.0Q370 599 376 609Q381 601 390.0 603.5Q399 606 407 609Q412 610 415.5 607.0Q419 604 422.0 601.0Q425 598 427.5 597.5Q430 597 432 602Q437 602 435.0 597.0Q433 592 432 590Q440 591 445.5 586.5Q451 582 463 581Q467 576 465.0 573.5Q463 571 463 565Q493 556 501.0 536.5Q509 517 502.0 496.0Q495 475 477.0 457.0Q459 439 438 433Q390 420 347.5 404.5Q305 389 278 359Q254 352 235.5 340.5Q217 329 200.5 314.5Q184 300 169.5 284.5Q155 269 139 254Q140 240 134.5 232.5Q129 225 124 217Q126 202 131.0 190.5Q136 179 142 168Q208 148 282.5 143.0Q357 138 432 137Q439 127 448.5 118.5Q458 110 466.0 100.5Q474 91 479.0 79.5Q484 68 481 51Q467 36 450.0 23.5Q433 11 416 -2Z"/>
   </g>
-
-  <!-- paint drips -->
   <rect x="209" y="240" width="5" rx="2.5" fill="url(#dripMagenta)">
     <animate attributeName="height" values="0;50;60;0" dur="3.5s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="3.5s" repeatCount="indefinite"/>
   </rect>
   <rect x="370" y="238" width="4" rx="2.0" fill="url(#dripCyan)">
     <animate attributeName="height" values="0;50;60;0" dur="4s" repeatCount="indefinite" begin="1s"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="4s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="4s" repeatCount="indefinite" begin="1s"/>
   </rect>
   <rect x="530" y="242" width="5" rx="2.5" fill="url(#dripYellow)">
     <animate attributeName="height" values="0;50;60;0" dur="3s" repeatCount="indefinite" begin="2s"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="3s" repeatCount="indefinite" begin="2s"/>
   </rect>
   <rect x="675" y="236" width="4" rx="2.0" fill="url(#dripMagenta)">
     <animate attributeName="height" values="0;50;60;0" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
   </rect>
-
-  <!-- tagline -->
   <g transform="translate(347.0,320)" class="tagline" fill="rgba(0,255,255,0.6)">
     <path transform="translate(0.0,0) scale(0.014000,-0.014000)" d="M452 0 35 720H215L517 197L819 720H998L581 0Z"/>
     <path transform="translate(15.0,0) scale(0.014000,-0.014000)" d="M31 0V720H184V0Z"/>

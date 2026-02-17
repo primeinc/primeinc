@@ -1,200 +1,131 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="100%">
   <defs>
     <style>
-      /* ── ghost float ── */
       @keyframes ghostFloat1 {
         0%, 100% { transform: translate(-4px, -4px) skewX(-2deg); opacity: 0.15; }
-        50%      { transform: translate(-8px, 2px) skewX(-3deg); opacity: 0.10; }
+        50%       { transform: translate(-8px, 2px) skewX(-3deg); opacity: 0.10; }
       }
       @keyframes ghostFloat2 {
         0%, 100% { transform: translate(4px, 4px) skewX(2deg); opacity: 0.12; }
-        50%      { transform: translate(8px, -2px) skewX(3deg); opacity: 0.08; }
+        50%       { transform: translate(8px, -2px) skewX(3deg); opacity: 0.08; }
       }
-
-      /* ── flicker ── */
       @keyframes flicker {
         0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
         20%, 24%, 55% { opacity: 0.85; }
       }
-
-      /* ── particle drift ── */
       @keyframes particleDrift1 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        10%  { opacity: 0.6; }
-        90%  { opacity: 0.6; }
-        100% { transform: translate(60px, -80px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        10%  { opacity: 0.6; } 90% { opacity: 0.6; }
+        100% { transform: translate(60px,-80px); opacity: 0; }
       }
       @keyframes particleDrift2 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        10%  { opacity: 0.4; }
-        90%  { opacity: 0.4; }
-        100% { transform: translate(-50px, -60px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        10%  { opacity: 0.4; } 90% { opacity: 0.4; }
+        100% { transform: translate(-50px,-60px); opacity: 0; }
       }
       @keyframes particleDrift3 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        10%  { opacity: 0.5; }
-        90%  { opacity: 0.5; }
-        100% { transform: translate(40px, 70px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        10%  { opacity: 0.5; } 90% { opacity: 0.5; }
+        100% { transform: translate(40px,70px); opacity: 0; }
       }
       @keyframes particleDrift4 {
-        0%   { transform: translate(0, 0); opacity: 0; }
-        15%  { opacity: 0.3; }
-        85%  { opacity: 0.3; }
-        100% { transform: translate(-70px, 50px); opacity: 0; }
+        0%   { transform: translate(0,0); opacity: 0; }
+        15%  { opacity: 0.3; } 85% { opacity: 0.3; }
+        100% { transform: translate(-70px,50px); opacity: 0; }
       }
-
-      /* ── scanline scroll ── */
-      @keyframes scanScroll {
-        0%   { transform: translateY(0); }
-        100% { transform: translateY(8px); }
-      }
-
-      /* ── tagline pulse ── */
-      @keyframes tagPulse {
-        0%, 100% { opacity: 0.5; }
-        50%      { opacity: 0.8; }
-      }
+      @keyframes scanScroll  { 0% { transform: translateY(0); } 100% { transform: translateY(8px); } }
+      @keyframes tagPulse    { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
 
       .main-text { animation: flicker 8s linear infinite; }
-      .ghost1 { animation: ghostFloat1 4s ease-in-out infinite; }
-      .ghost2 { animation: ghostFloat2 5s ease-in-out infinite; }
-      .tagline { animation: tagPulse 4s ease-in-out infinite; }
+      .ghost1    { animation: ghostFloat1 4s ease-in-out infinite; }
+      .ghost2    { animation: ghostFloat2 5s ease-in-out infinite; }
+      .tagline   { animation: tagPulse 4s ease-in-out infinite; }
       .scanlines { animation: scanScroll 0.5s linear infinite; }
     </style>
 
-    <!-- background gradient -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%"   style="stop-color:#0d0221"><animate attributeName="stop-color" values="#0d0221;#150050;#3f0071;#000428;#0d0221" dur="12s" repeatCount="indefinite"/></stop>
       <stop offset="50%"  style="stop-color:#150050"><animate attributeName="stop-color" values="#150050;#610094;#004e92;#0d0221;#150050" dur="12s" repeatCount="indefinite"/></stop>
       <stop offset="100%" style="stop-color:#000428"><animate attributeName="stop-color" values="#000428;#0d0221;#150050;#610094;#000428" dur="12s" repeatCount="indefinite"/></stop>
     </linearGradient>
 
-    <!-- text gradient -->
     <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%"><animate attributeName="stop-color" values="#ff00ff;#00ffff;#ffff00;#ff00ff" dur="6s" repeatCount="indefinite"/></stop>
       <stop offset="50%"><animate attributeName="stop-color" values="#00ffff;#ff6ec7;#ff00ff;#00ffff" dur="6s" repeatCount="indefinite"/></stop>
       <stop offset="100%"><animate attributeName="stop-color" values="#ffff00;#ff00ff;#00ffff;#ffff00" dur="6s" repeatCount="indefinite"/></stop>
     </linearGradient>
 
-    <!-- glow filter -->
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur1"/>
-      <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="blur2"/>
-      <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur3"/>
-      <feMerge>
-        <feMergeNode in="blur3"/>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="b2"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="b3"/>
+      <feMerge><feMergeNode in="b3"/><feMergeNode in="b2"/><feMergeNode in="b1"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
-    <!-- ghost glow filters -->
     <filter id="glowMagenta" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0.3  0 0 0 0 0  0 0 0 0 0.3  0 0 0 1 0"/>
+      <feGaussianBlur stdDeviation="10"/><feColorMatrix type="matrix" values="1 0 0 0 .3 0 0 0 0 0 0 0 0 0 .3 0 0 0 1 0"/>
     </filter>
     <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="10"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0.3  0 0 0 0 0.3  0 0 0 1 0"/>
+      <feGaussianBlur stdDeviation="10"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 .3 0 0 0 0 .3 0 0 0 1 0"/>
     </filter>
 
-    <!-- drip gradients -->
-    <linearGradient id="dripMagenta" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ff00ff" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#ff00ff" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="dripCyan" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#00ffff" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#00ffff" stop-opacity="0"/>
-    </linearGradient>
-    <linearGradient id="dripYellow" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffff00" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ffff00" stop-opacity="0"/>
-    </linearGradient>
+    <linearGradient id="dripMagenta" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ff00ff" stop-opacity=".7"/><stop offset="100%" stop-color="#ff00ff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="dripCyan"    x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00ffff" stop-opacity=".6"/><stop offset="100%" stop-color="#00ffff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="dripYellow"  x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffff00" stop-opacity=".5"/><stop offset="100%" stop-color="#ffff00" stop-opacity="0"/></linearGradient>
 
-    <!-- scanline pattern -->
-    <pattern id="scanPattern" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect width="4" height="2" fill="transparent"/>
-      <rect y="2" width="4" height="2" fill="rgba(0,0,0,0.12)"/>
-    </pattern>
-
-    <!-- grid pattern -->
-    <pattern id="gridPattern" width="50" height="50" patternUnits="userSpaceOnUse">
-      <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(0,255,255,0.04)" stroke-width="0.5"/>
-    </pattern>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="2" fill="transparent"/><rect y="2" width="4" height="2" fill="rgba(0,0,0,.12)"/></pattern>
+    <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0L0 0 0 50" fill="none" stroke="rgba(0,255,255,.04)" stroke-width=".5"/></pattern>
   </defs>
 
-  <!-- background -->
   <rect width="900" height="400" rx="12" fill="url(#bgGrad)"/>
+  <rect width="900" height="400" rx="12" fill="url(#grid)"/>
+  <g class="scanlines"><rect width="900" height="420" y="-10" fill="url(#scan)"/></g>
 
-  <!-- grid overlay -->
-  <rect width="900" height="400" rx="12" fill="url(#gridPattern)"/>
+  <circle cx="120" cy="80"  r="1.5" fill="#ff00ff" style="animation:particleDrift1 7s linear infinite"/>
+  <circle cx="250" cy="320" r="1"   fill="#00ffff" style="animation:particleDrift2 9s linear infinite;animation-delay:1s"/>
+  <circle cx="400" cy="60"  r="2"   fill="#ffff00" style="animation:particleDrift3 6s linear infinite;animation-delay:.5s"/>
+  <circle cx="600" cy="340" r="1.5" fill="#ff6ec7" style="animation:particleDrift4 8s linear infinite;animation-delay:2s"/>
+  <circle cx="750" cy="100" r="1"   fill="#00ffff" style="animation:particleDrift1 10s linear infinite;animation-delay:3s"/>
+  <circle cx="800" cy="280" r="2"   fill="#ff00ff" style="animation:particleDrift2 7s linear infinite;animation-delay:4s"/>
+  <circle cx="50"  cy="200" r="1.5" fill="#ffff00" style="animation:particleDrift3 9s linear infinite;animation-delay:1.5s"/>
+  <circle cx="500" cy="350" r="1"   fill="#ff6ec7" style="animation:particleDrift4 6s linear infinite;animation-delay:2.5s"/>
+  <circle cx="320" cy="150" r="1.8" fill="#00ffff" style="animation:particleDrift1 8s linear infinite;animation-delay:.8s"/>
+  <circle cx="680" cy="200" r="1.2" fill="#ff00ff" style="animation:particleDrift2 11s linear infinite;animation-delay:3.5s"/>
+  <circle cx="150" cy="300" r="1.5" fill="#ffff00" style="animation:particleDrift3 7s linear infinite;animation-delay:5s"/>
+  <circle cx="850" cy="150" r="1"   fill="#00ffff" style="animation:particleDrift4 9s linear infinite;animation-delay:1.2s"/>
 
-  <!-- scanlines -->
-  <g class="scanlines" clip-path="inset(0 round 12px)">
-    <rect width="900" height="420" y="-10" fill="url(#scanPattern)"/>
+  <g stroke="rgba(0,255,255,.25)" stroke-width="2" fill="none">
+    <path d="M30,55 L30,30 L55,30"/><path d="M870,55 L870,30 L845,30"/>
+    <path d="M30,345 L30,370 L55,370"/><path d="M870,345 L870,370 L845,370"/>
   </g>
 
-  <!-- floating particles -->
-  <circle cx="120" cy="80"  r="1.5" fill="#ff00ff" style="animation: particleDrift1 7s linear infinite"/>
-  <circle cx="250" cy="320" r="1"   fill="#00ffff" style="animation: particleDrift2 9s linear infinite; animation-delay: 1s"/>
-  <circle cx="400" cy="60"  r="2"   fill="#ffff00" style="animation: particleDrift3 6s linear infinite; animation-delay: 0.5s"/>
-  <circle cx="600" cy="340" r="1.5" fill="#ff6ec7" style="animation: particleDrift4 8s linear infinite; animation-delay: 2s"/>
-  <circle cx="750" cy="100" r="1"   fill="#00ffff" style="animation: particleDrift1 10s linear infinite; animation-delay: 3s"/>
-  <circle cx="800" cy="280" r="2"   fill="#ff00ff" style="animation: particleDrift2 7s linear infinite; animation-delay: 4s"/>
-  <circle cx="50"  cy="200" r="1.5" fill="#ffff00" style="animation: particleDrift3 9s linear infinite; animation-delay: 1.5s"/>
-  <circle cx="500" cy="350" r="1"   fill="#ff6ec7" style="animation: particleDrift4 6s linear infinite; animation-delay: 2.5s"/>
-  <circle cx="320" cy="150" r="1.8" fill="#00ffff" style="animation: particleDrift1 8s linear infinite; animation-delay: 0.8s"/>
-  <circle cx="680" cy="200" r="1.2" fill="#ff00ff" style="animation: particleDrift2 11s linear infinite; animation-delay: 3.5s"/>
-  <circle cx="150" cy="300" r="1.5" fill="#ffff00" style="animation: particleDrift3 7s linear infinite; animation-delay: 5s"/>
-  <circle cx="850" cy="150" r="1"   fill="#00ffff" style="animation: particleDrift4 9s linear infinite; animation-delay: 1.2s"/>
-
-  <!-- corner brackets -->
-  <g stroke="rgba(0,255,255,0.25)" stroke-width="2" fill="none">
-    <path d="M 30,55 L 30,30 L 55,30"/>
-    <path d="M 870,55 L 870,30 L 845,30"/>
-    <path d="M 30,345 L 30,370 L 55,370"/>
-    <path d="M 870,345 L 870,370 L 845,370"/>
-  </g>
-
-  <!-- ghost layer 1 (magenta) -->
   <g transform="translate(349.0,225)" class="ghost1" fill="#ff00ff" filter="url(#glowMagenta)" opacity="0.15">
     <path transform="translate(0.0,0) scale(0.117188,-0.117188)" d="M78 71Q73 82 68.0 92.0Q63 102 58 110Q46 134 37.0 153.0Q28 172 20 197Q23 214 30.5 254.0Q38 294 48.0 341.5Q58 389 69.5 438.0Q81 487 93 522Q104 553 117.5 588.0Q131 623 147.5 652.5Q164 682 183.0 703.0Q202 724 224 728Q230 720 237.0 715.5Q244 711 250 709Q267 685 283.0 668.5Q299 652 321 636Q315 606 303.5 569.5Q292 533 279.5 496.0Q267 459 255.0 424.5Q243 390 236 365Q230 345 224 319Q219 297 213.5 266.0Q208 235 203 198Q217 202 234.5 214.0Q252 226 267 239Q285 254 302 271Q325 294 341.0 313.0Q357 332 370.5 352.5Q384 373 398.5 397.5Q413 422 433 456Q451 485 470.5 518.0Q490 551 510.0 581.0Q530 611 549.0 636.5Q568 662 584 676Q595 665 609.5 653.0Q624 641 641 636Q648 625 654.5 616.5Q661 608 667 600Q675 589 681.5 580.0Q688 571 693 560Q692 552 689.5 539.0Q687 526 684.0 510.5Q681 495 677.5 479.0Q674 463 671 448Q661 403 656.0 380.0Q651 357 649.0 344.0Q647 331 646.5 322.0Q646 313 646 297Q646 285 648 273Q650 262 652.5 250.5Q655 239 662 229L710 266Q730 281 748.5 308.5Q767 336 784.5 371.5Q802 407 819.0 448.5Q836 490 853 534Q865 566 877.5 597.5Q890 629 903.0 657.5Q916 686 928.5 709.5Q941 733 953 749Q980 732 999.5 715.0Q1019 698 1033.5 677.5Q1048 657 1056.5 630.5Q1065 604 1069 568Q1047 526 1028.0 482.0Q1009 438 990 393Q966 335 940.5 277.5Q915 220 884.0 168.0Q853 116 814.5 72.5Q776 29 726 -1Q712 2 702 2Q691 2 683.5 -1.0Q676 -4 670 -9Q629 10 604.0 47.5Q579 85 555 131Q552 138 548.5 144.5Q545 151 541 158L524 189L514 208L500 195L479 176L467 164Q436 135 404.0 107.5Q372 80 337.0 57.5Q302 35 262.5 21.0Q223 7 178 6Q170 10 163.5 13.0Q157 16 151 19Q128 30 113.0 40.0Q98 50 78 71Z"/>
     <path transform="translate(125.3,0) scale(0.117188,-0.117188)" d="M45 282Q46 286 49.5 285.5Q53 285 56 286Q48 294 46.0 307.5Q44 321 36 330Q38 335 39.5 340.0Q41 345 48 344Q45 366 49.0 385.0Q53 404 61.5 421.0Q70 438 81.5 454.5Q93 471 104 488Q113 490 115.0 486.5Q117 483 122 488Q138 499 144.0 512.5Q150 526 150 542Q159 568 170.5 593.5Q182 619 197.0 641.0Q212 663 229.0 679.5Q246 696 266 705Q280 717 301.5 727.0Q323 737 347.5 742.5Q372 748 398.0 748.5Q424 749 446 743Q451 741 452.0 745.5Q453 750 457 750Q507 744 546.5 730.0Q586 716 614 691Q633 661 650.0 626.5Q667 592 676.5 554.5Q686 517 685.0 477.0Q684 437 668 397Q633 353 583.0 326.5Q533 300 475.5 282.5Q418 265 356.5 254.0Q295 243 237 230Q238 203 237.0 172.5Q236 142 230.5 111.5Q225 81 214.5 52.0Q204 23 186 -2Q166 -1 144.5 -6.0Q123 -11 106 -16Q98 -11 90.5 -6.5Q83 -2 72 -1Q75 11 66.5 24.0Q58 37 49.5 49.5Q41 62 38.5 74.5Q36 87 50 97Q42 104 42 119Q46 115 52 115Q50 133 56.5 158.0Q63 183 67.5 207.5Q72 232 69.0 252.5Q66 273 45 282ZM305 516Q301 505 298.5 496.5Q296 488 293.0 481.0Q290 474 286.5 467.0Q283 460 279 451Q281 445 287.0 442.0Q293 439 295 433Q309 440 323.0 443.5Q337 447 351.0 449.0Q365 451 379.0 454.0Q393 457 408 464Q423 471 439.5 475.5Q456 480 472.0 485.0Q488 490 503.0 496.5Q518 503 529 514Q515 527 487.0 537.0Q459 547 426.5 549.5Q394 552 361.5 545.0Q329 538 305 516Z"/>
   </g>
-
-  <!-- ghost layer 2 (cyan) -->
   <g transform="translate(349.0,225)" class="ghost2" fill="#00ffff" filter="url(#glowCyan)" opacity="0.12">
     <path transform="translate(0.0,0) scale(0.117188,-0.117188)" d="M78 71Q73 82 68.0 92.0Q63 102 58 110Q46 134 37.0 153.0Q28 172 20 197Q23 214 30.5 254.0Q38 294 48.0 341.5Q58 389 69.5 438.0Q81 487 93 522Q104 553 117.5 588.0Q131 623 147.5 652.5Q164 682 183.0 703.0Q202 724 224 728Q230 720 237.0 715.5Q244 711 250 709Q267 685 283.0 668.5Q299 652 321 636Q315 606 303.5 569.5Q292 533 279.5 496.0Q267 459 255.0 424.5Q243 390 236 365Q230 345 224 319Q219 297 213.5 266.0Q208 235 203 198Q217 202 234.5 214.0Q252 226 267 239Q285 254 302 271Q325 294 341.0 313.0Q357 332 370.5 352.5Q384 373 398.5 397.5Q413 422 433 456Q451 485 470.5 518.0Q490 551 510.0 581.0Q530 611 549.0 636.5Q568 662 584 676Q595 665 609.5 653.0Q624 641 641 636Q648 625 654.5 616.5Q661 608 667 600Q675 589 681.5 580.0Q688 571 693 560Q692 552 689.5 539.0Q687 526 684.0 510.5Q681 495 677.5 479.0Q674 463 671 448Q661 403 656.0 380.0Q651 357 649.0 344.0Q647 331 646.5 322.0Q646 313 646 297Q646 285 648 273Q650 262 652.5 250.5Q655 239 662 229L710 266Q730 281 748.5 308.5Q767 336 784.5 371.5Q802 407 819.0 448.5Q836 490 853 534Q865 566 877.5 597.5Q890 629 903.0 657.5Q916 686 928.5 709.5Q941 733 953 749Q980 732 999.5 715.0Q1019 698 1033.5 677.5Q1048 657 1056.5 630.5Q1065 604 1069 568Q1047 526 1028.0 482.0Q1009 438 990 393Q966 335 940.5 277.5Q915 220 884.0 168.0Q853 116 814.5 72.5Q776 29 726 -1Q712 2 702 2Q691 2 683.5 -1.0Q676 -4 670 -9Q629 10 604.0 47.5Q579 85 555 131Q552 138 548.5 144.5Q545 151 541 158L524 189L514 208L500 195L479 176L467 164Q436 135 404.0 107.5Q372 80 337.0 57.5Q302 35 262.5 21.0Q223 7 178 6Q170 10 163.5 13.0Q157 16 151 19Q128 30 113.0 40.0Q98 50 78 71Z"/>
     <path transform="translate(125.3,0) scale(0.117188,-0.117188)" d="M45 282Q46 286 49.5 285.5Q53 285 56 286Q48 294 46.0 307.5Q44 321 36 330Q38 335 39.5 340.0Q41 345 48 344Q45 366 49.0 385.0Q53 404 61.5 421.0Q70 438 81.5 454.5Q93 471 104 488Q113 490 115.0 486.5Q117 483 122 488Q138 499 144.0 512.5Q150 526 150 542Q159 568 170.5 593.5Q182 619 197.0 641.0Q212 663 229.0 679.5Q246 696 266 705Q280 717 301.5 727.0Q323 737 347.5 742.5Q372 748 398.0 748.5Q424 749 446 743Q451 741 452.0 745.5Q453 750 457 750Q507 744 546.5 730.0Q586 716 614 691Q633 661 650.0 626.5Q667 592 676.5 554.5Q686 517 685.0 477.0Q684 437 668 397Q633 353 583.0 326.5Q533 300 475.5 282.5Q418 265 356.5 254.0Q295 243 237 230Q238 203 237.0 172.5Q236 142 230.5 111.5Q225 81 214.5 52.0Q204 23 186 -2Q166 -1 144.5 -6.0Q123 -11 106 -16Q98 -11 90.5 -6.5Q83 -2 72 -1Q75 11 66.5 24.0Q58 37 49.5 49.5Q41 62 38.5 74.5Q36 87 50 97Q42 104 42 119Q46 115 52 115Q50 133 56.5 158.0Q63 183 67.5 207.5Q72 232 69.0 252.5Q66 273 45 282ZM305 516Q301 505 298.5 496.5Q296 488 293.0 481.0Q290 474 286.5 467.0Q283 460 279 451Q281 445 287.0 442.0Q293 439 295 433Q309 440 323.0 443.5Q337 447 351.0 449.0Q365 451 379.0 454.0Q393 457 408 464Q423 471 439.5 475.5Q456 480 472.0 485.0Q488 490 503.0 496.5Q518 503 529 514Q515 527 487.0 537.0Q459 547 426.5 549.5Q394 552 361.5 545.0Q329 538 305 516Z"/>
   </g>
-
-  <!-- main text -->
   <g transform="translate(349.0,225)" class="main-text" fill="url(#textGrad)" filter="url(#glow)">
     <path transform="translate(0.0,0) scale(0.117188,-0.117188)" d="M78 71Q73 82 68.0 92.0Q63 102 58 110Q46 134 37.0 153.0Q28 172 20 197Q23 214 30.5 254.0Q38 294 48.0 341.5Q58 389 69.5 438.0Q81 487 93 522Q104 553 117.5 588.0Q131 623 147.5 652.5Q164 682 183.0 703.0Q202 724 224 728Q230 720 237.0 715.5Q244 711 250 709Q267 685 283.0 668.5Q299 652 321 636Q315 606 303.5 569.5Q292 533 279.5 496.0Q267 459 255.0 424.5Q243 390 236 365Q230 345 224 319Q219 297 213.5 266.0Q208 235 203 198Q217 202 234.5 214.0Q252 226 267 239Q285 254 302 271Q325 294 341.0 313.0Q357 332 370.5 352.5Q384 373 398.5 397.5Q413 422 433 456Q451 485 470.5 518.0Q490 551 510.0 581.0Q530 611 549.0 636.5Q568 662 584 676Q595 665 609.5 653.0Q624 641 641 636Q648 625 654.5 616.5Q661 608 667 600Q675 589 681.5 580.0Q688 571 693 560Q692 552 689.5 539.0Q687 526 684.0 510.5Q681 495 677.5 479.0Q674 463 671 448Q661 403 656.0 380.0Q651 357 649.0 344.0Q647 331 646.5 322.0Q646 313 646 297Q646 285 648 273Q650 262 652.5 250.5Q655 239 662 229L710 266Q730 281 748.5 308.5Q767 336 784.5 371.5Q802 407 819.0 448.5Q836 490 853 534Q865 566 877.5 597.5Q890 629 903.0 657.5Q916 686 928.5 709.5Q941 733 953 749Q980 732 999.5 715.0Q1019 698 1033.5 677.5Q1048 657 1056.5 630.5Q1065 604 1069 568Q1047 526 1028.0 482.0Q1009 438 990 393Q966 335 940.5 277.5Q915 220 884.0 168.0Q853 116 814.5 72.5Q776 29 726 -1Q712 2 702 2Q691 2 683.5 -1.0Q676 -4 670 -9Q629 10 604.0 47.5Q579 85 555 131Q552 138 548.5 144.5Q545 151 541 158L524 189L514 208L500 195L479 176L467 164Q436 135 404.0 107.5Q372 80 337.0 57.5Q302 35 262.5 21.0Q223 7 178 6Q170 10 163.5 13.0Q157 16 151 19Q128 30 113.0 40.0Q98 50 78 71Z"/>
     <path transform="translate(125.3,0) scale(0.117188,-0.117188)" d="M45 282Q46 286 49.5 285.5Q53 285 56 286Q48 294 46.0 307.5Q44 321 36 330Q38 335 39.5 340.0Q41 345 48 344Q45 366 49.0 385.0Q53 404 61.5 421.0Q70 438 81.5 454.5Q93 471 104 488Q113 490 115.0 486.5Q117 483 122 488Q138 499 144.0 512.5Q150 526 150 542Q159 568 170.5 593.5Q182 619 197.0 641.0Q212 663 229.0 679.5Q246 696 266 705Q280 717 301.5 727.0Q323 737 347.5 742.5Q372 748 398.0 748.5Q424 749 446 743Q451 741 452.0 745.5Q453 750 457 750Q507 744 546.5 730.0Q586 716 614 691Q633 661 650.0 626.5Q667 592 676.5 554.5Q686 517 685.0 477.0Q684 437 668 397Q633 353 583.0 326.5Q533 300 475.5 282.5Q418 265 356.5 254.0Q295 243 237 230Q238 203 237.0 172.5Q236 142 230.5 111.5Q225 81 214.5 52.0Q204 23 186 -2Q166 -1 144.5 -6.0Q123 -11 106 -16Q98 -11 90.5 -6.5Q83 -2 72 -1Q75 11 66.5 24.0Q58 37 49.5 49.5Q41 62 38.5 74.5Q36 87 50 97Q42 104 42 119Q46 115 52 115Q50 133 56.5 158.0Q63 183 67.5 207.5Q72 232 69.0 252.5Q66 273 45 282ZM305 516Q301 505 298.5 496.5Q296 488 293.0 481.0Q290 474 286.5 467.0Q283 460 279 451Q281 445 287.0 442.0Q293 439 295 433Q309 440 323.0 443.5Q337 447 351.0 449.0Q365 451 379.0 454.0Q393 457 408 464Q423 471 439.5 475.5Q456 480 472.0 485.0Q488 490 503.0 496.5Q518 503 529 514Q515 527 487.0 537.0Q459 547 426.5 549.5Q394 552 361.5 545.0Q329 538 305 516Z"/>
   </g>
-
-  <!-- paint drips -->
   <rect x="359" y="240" width="5" rx="2.5" fill="url(#dripMagenta)">
     <animate attributeName="height" values="0;50;60;0" dur="3.5s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="3.5s" repeatCount="indefinite"/>
   </rect>
   <rect x="420" y="238" width="4" rx="2.0" fill="url(#dripCyan)">
     <animate attributeName="height" values="0;50;60;0" dur="4s" repeatCount="indefinite" begin="1s"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="4s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="4s" repeatCount="indefinite" begin="1s"/>
   </rect>
   <rect x="480" y="242" width="5" rx="2.5" fill="url(#dripYellow)">
     <animate attributeName="height" values="0;50;60;0" dur="3s" repeatCount="indefinite" begin="2s"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3s" repeatCount="indefinite" begin="2s"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="3s" repeatCount="indefinite" begin="2s"/>
   </rect>
   <rect x="535" y="236" width="4" rx="2.0" fill="url(#dripMagenta)">
     <animate attributeName="height" values="0;50;60;0" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
-    <animate attributeName="opacity" values="0.7;0.7;0.4;0" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
+    <animate attributeName="opacity" values=".7;.7;.4;0" dur="3.8s" repeatCount="indefinite" begin="0.5s"/>
   </rect>
-
-  <!-- tagline -->
   <g transform="translate(347.0,320)" class="tagline" fill="rgba(0,255,255,0.6)">
     <path transform="translate(0.0,0) scale(0.014000,-0.014000)" d="M452 0 35 720H215L517 197L819 720H998L581 0Z"/>
     <path transform="translate(15.0,0) scale(0.014000,-0.014000)" d="M31 0V720H184V0Z"/>
